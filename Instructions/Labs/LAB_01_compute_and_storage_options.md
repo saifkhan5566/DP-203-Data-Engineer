@@ -87,7 +87,7 @@ In this exercise, you will use an Azure Databricks workspace and perform Structu
     cd C:\dp-203\data-engineering-ilt-deployment\Allfiles\00\artifacts\environment-setup\automation\
     ```
 
-3. Enter the following command to run a PowerShell script that creates objects in the SQL pool:
+3. Enter the following command to run a PowerShell script that creates objects into the Azure Data Lake that will be consumed in Azure Synapse Analytics notebooks and as External Tables or Views:
 
     ```
     .\dp-203-setup-Part02.ps1
