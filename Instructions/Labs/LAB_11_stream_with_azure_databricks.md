@@ -96,8 +96,9 @@ Before starting this lab, ensure you have successfully completed the setup steps
    - **Name**: `databricks-demo-eventhub`
    - **Partition Count**: `2`
    - **Message Retention**: `1`
-   - **Capture**: *Off*
-
+   
+   Select **Next: Capture** and set the **Capture**  to **OFF**
+   
    Select **Create**.
 
    ![Screenshot of the "Create Event Hub" pane](images//create-event-hub-pane.png "Create Event Hub")
