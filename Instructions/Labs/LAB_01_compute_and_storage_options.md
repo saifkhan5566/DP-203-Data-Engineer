@@ -111,9 +111,6 @@ In this exercise, you will use an Azure Databricks workspace and perform Structu
 >
 >       *Principal 'xxx@xxx.com' could not be created. Only connections established with Active Directory accounts can create other Active Directory users.*
 >
->2. The following error may also occur and can safely be ignored:
->
->       *07-create-wwi-perf-sale-heap with label CTAS : Sale_Heap. Cannot index into a null array.*
 > 
 ## Exercise 2 - Working with Apache Spark in Synapse Analytics
 

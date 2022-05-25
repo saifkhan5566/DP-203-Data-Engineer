@@ -16,8 +16,9 @@ After completing this lab, you will be able to:
 
 Before starting this lab, you should complete **Lab 6: *Transform data with Azure Data Factory or Azure Synapse Pipelines***.
 
+
 > **Note**: If you have ***not*** completed lab 6, but you <u>have</u> completed the lab setup for this course, you can complete these steps to create the required linked services and datasets.
->
+> 
 > 1. In Synapse Studio, on the **Manage** hub, add a new **Linked service** for **Azure Cosmos DB (SQL API)** with the following settings:
 >       - **Name**: asacosmosdb01
 >       - **Cosmos DB account name**: asacosmosdb*xxxxxxx*
@@ -36,6 +37,8 @@ Before starting this lab, you should complete **Lab 6: *Transform data with Azur
 >           - **File path**: wwi-02/online-user-profiles-02
 >           - **Import schema**: From connection/store
 
+### Setup warnings that you can safely ignore:
+   1. The following error may also occur and can safely be ignored: >       *07-create-wwi-perf-sale-heap with label CTAS : Sale_Heap. Cannot index into a null array.*
 ## Exercise 1 - Create mapping data flow and pipeline
 
 In this exercise, you create a mapping data flow that copies user profile data to the data lake, then create a pipeline that orchestrates executing the data flow, and later on, the Spark notebook you create later in this lab.
