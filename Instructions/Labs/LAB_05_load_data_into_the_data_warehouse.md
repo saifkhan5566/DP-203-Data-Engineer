@@ -557,15 +557,15 @@ To run loads with appropriate compute resources, create loading users designated
 
 6. If you have more than one Azure subscription, when prompted, select the one you want to use in the labs by entering its number in the list of subscriptions.
 
-7. In Synapse Studio, select the **Manage** hub.
-8. Select **SQL pools** in the left-hand menu. Hover over the **SQLPool01** dedicated SQL pool and select **||**.
-
-    ![The pause button is highlighted on the dedicated SQL pool.](images/pause-dedicated-sql-pool.png "Pause")
-
-9. When prompted, select **Pause**.
-
 
 
 ## Important: Pause your SQL pool when the PowerShell script has completed running
 
 Complete these steps to free up resources you no longer need.
+
+1. In Synapse Studio, select the **Manage** hub.
+2. Select **SQL pools** in the left-hand menu. Hover over the **SQLPool01** dedicated SQL pool and select **||**.
+
+    ![The pause button is highlighted on the dedicated SQL pool.](images/pause-dedicated-sql-pool.png "Pause")
+
+3. When prompted, select **Pause**.7. In Synapse Studio, select the **Manage** hub.
