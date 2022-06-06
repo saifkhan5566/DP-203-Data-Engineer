@@ -65,43 +65,7 @@ By combining the distributed scale of Cosmos DB's transactional processing with 
 
     ![The operation completed successfully.](images/notifications-completed.png "Notifications")
 
-### Task 2: Create a new Azure Cosmos DB container
-
-Tailwind Traders has an Azure Cosmos DB container named **OnlineUserProfile01**. Since we enabled the Azure Synapse Link feature _after_ the container was already created, we cannot enable the analytical store on the container. We will create a new container that has the same partition key and enable the analytical store.
-
-After creating the container, we will create a new Synapse Pipeline to copy data from the **OnlineUserProfile01** container to the new one.
-
-1. Select **Data Explorer** on the left-hand menu.
-
-    ![The menu item is selected.](images/data-explorer-link.png "Data Explorer")
-
-2. Select **New Container**.
-
-    ![The button is highlighted.](images/new-container-button.png "New Container")
-
-3. Create a new container with the following settings and select **OK**:
-    - **Database id**: Use the existing **CustomerProfile** database.
-    - **Container id**: Enter `UserProfileHTAP`
-    - **Partition key**: Enter `/userId`
-    - **Throughput**: Select **Autoscale**
-    - **Container max RU/s**: Enter `4000`
-    - **Analytical store**: On
-
-    ![The form is configured as described.](images/new-container.png "New container")
-
-    Here we set the **partition key** value to **userId**, because it is a field we use most often in queries and contains a relatively high cardinality (number of unique values) for good partitioning performance. We set the throughput to Autoscale with a maximum value of 4,000 request units (RUs). This means that the container will have a minimum of 400 RUs allocated (10% of the maximum number), and will scale up to a maximum of 4,000 when the scale engine detects a high enough demand to warrant increasing the throughput. Finally, we enable the **analytical store** on the container, which allows us to take full advantage of the Hybrid Transactional/Analytical Processing (HTAP) architecture from within Synapse Analytics.
-
-    Let's take a quick look at the data we will copy over to the new container.
-
-4. Expand the **OnlineUserProfile01** container underneath the **CustomerProfile** database, then select **Items**. Select one of the documents and view its contents. The documents are stored in JSON format.
-
-    ![The container items are displayed.](images/existing-items.png "Container items")
-
-5. Select **Keys** in the left-hand menu. You will need the **Primary Key** and the Cosmos DB account name (in the upper-left corner) later, so keep this tab open.
-
-    ![The primary key is highlighted.](images/cosmos-keys.png "Keys")
-
-### Task 3: Create and run a copy pipeline
+### Task 2: Create and run a copy pipeline
 
 Now that we have the new Azure Cosmos DB container with the analytical store enabled, we need to copy the contents of the existing container by using a Synapse Pipeline.
 
