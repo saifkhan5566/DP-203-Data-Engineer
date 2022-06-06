@@ -499,6 +499,6 @@ To test out the permissions, we will add your own account to the groups.
 
     Now let's verify that the file was written to the data lake.
 
-19. In Synapse Studio, in the **Data** hub, on the **Linked** tab select the **Azure Data Lake Storage Gen2/asaworkspace*xxxxxxx*/wwi02** container; and browse to the *sale-small/Year=2019/Quarter=Q4/Month=12/Day=20191231* folder to verify that a new file has been added to this folder.
+19. In Synapse Studio, in the **Data** hub, on the **Linked** tab select the **Azure Data Lake Storage Gen2/asaworkspace*xxxxxxx*/wwi02** container; and browse to the *sale-small/Year=2016/Quarter=Q4/Month=12/Day=20161231* folder to verify that a new file has been added to this folder.
 
     ![The test Parquet file is displayed.](images/test-parquet-file.png "Test parquet file")
