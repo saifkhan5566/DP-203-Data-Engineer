@@ -50,7 +50,11 @@ By combining the distributed scale of Cosmos DB's transactional processing with 
     ![The Azure Cosmos DB account is highlighted.](images/resource-group-cosmos.png "Azure Cosmos DB account")
 
 3. In the left-hand menu,  select **Azure Synapse Link**.
+   a. Ensure **Account enabled** is set.\
+   b. Under **Enabled Azure Synapse Link for your containers** make sure *cosmos_db_htap* and *UserProfileHTAP* are selected.
 
+    ![The Azure Cosmos DB account is highlighted.](images/2022-Synapse-link-cosmosdb.png "Azure Cosmos DB account")
+  
 4. Select **Enable**.
 
     ![Enable is highlighted.](images/synapse-link-enable.png "Azure Synapse Link")
