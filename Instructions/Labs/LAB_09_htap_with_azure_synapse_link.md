@@ -53,11 +53,11 @@ By combining the distributed scale of Cosmos DB's transactional processing with 
    a. Ensure **Account enabled** is set.\
    b. Under **Enabled Azure Synapse Link for your containers** make sure *cosmos_db_htap* and *OnlineUserProfile01* are selected.
 
-    ![The Azure Cosmos DB account is highlighted.](images/2022-Synapse-link-cosmosdb.png "Azure Cosmos DB account")
+    ![The Azure Cosmos DB account is highlighted.](images/2022-Synapse-link-cosmosdb_new.png "Azure Cosmos DB account")
   
 4. Select **Enable**.
 
-    ![Enable is highlighted.](images/synapse-link-enable_new.png "Azure Synapse Link")
+    ![Enable is highlighted.](images/synapse-link-enable.png "Azure Synapse Link")
 
     Before we enable the analytical store on our Azure Cosmos DB container, we must first enable Azure Synapse Link.
 
