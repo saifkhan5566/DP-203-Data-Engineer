@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ﻿# Import modules
 Import-Module Az.CosmosDB
 Import-Module "..\solliance-synapse-automation"
