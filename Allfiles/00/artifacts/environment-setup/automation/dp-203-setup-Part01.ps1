@@ -562,5 +562,3 @@ $SetupStep2Variables = "
 ((Get-Content -path .\dp-203-setup-Part03.ps1 -Raw) -replace '# Add Values from the first setup script here',"$SetupStep2Variables") | Set-Content -Path .\dp-203-setup-Part03.ps1
 
 $SetupStep2Variables
-
->>>>>>> 33f1bab407bc8695db011ff39a98c425270cfb7a
