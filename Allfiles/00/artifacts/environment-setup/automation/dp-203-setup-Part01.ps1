@@ -280,7 +280,6 @@ $SetupStep2Variables = "
 
 $SetupStep2Variables
 
-=======
 ﻿# Import modules
 Import-Module Az.CosmosDB
 Import-Module "..\solliance-synapse-automation"
