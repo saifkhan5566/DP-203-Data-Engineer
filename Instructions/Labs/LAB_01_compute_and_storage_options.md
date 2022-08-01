@@ -111,7 +111,7 @@ In this exercise, you will use an Azure Databricks workspace and perform Structu
 >
 >       *Principal 'xxx@xxx.com' could not be created. Only connections established with Active Directory accounts can create other Active Directory users.*
 >
-> 
+
 ## Exercise 2 - Working with Apache Spark in Synapse Analytics
 
 This exercise demonstrates the experience of working with Apache Spark in Azure Synapse Analytics. You will also learn how to use libraries like Hyperspace and MSSparkUtil to optimize the experience of working with Data Lake storage accounts from Spark notebooks.
@@ -146,26 +146,26 @@ Also, Hyperspace allows users to compare their original plan versus the updated 
 
 6. Add the following code to a new cell in your notebook:
 
-```python
-from hyperspace import *  
-from com.microsoft.hyperspace import *
-from com.microsoft.hyperspace.index import *
+    ```python
+    from hyperspace import *  
+    from com.microsoft.hyperspace import *
+    from com.microsoft.hyperspace.index import *
 
-# Disable BroadcastHashJoin, so Spark will use standard SortMergeJoin. Currently, Hyperspace indexes utilize SortMergeJoin to speed up query.
-spark.conf.set("spark.sql.autoBroadcastJoinThreshold", -1)
+    # Disable BroadcastHashJoin, so Spark will use standard SortMergeJoin. Currently, Hyperspace indexes utilize SortMergeJoin to speed up query.
+    spark.conf.set("spark.sql.autoBroadcastJoinThreshold", -1)
 
-# Replace the value below with the name of your primary ADLS Gen2 account for your Synapse workspace
-datalake = 'asadatalakeSUFFIX'
+    # Replace the value below with the name of your primary ADLS Gen2 account for your Synapse workspace
+    datalake = 'asadatalakeSUFFIX'
 
-dfSales = spark.read.parquet("abfss://wwi-02@" + datalake + ".dfs.core.windows.net/sale-small/Year=2019/Quarter=Q4/Month=12/*/*.parquet")
-dfSales.show(10)
+    dfSales = spark.read.parquet("abfss://wwi-02@" + datalake + ".dfs.core.windows.net/sale-small/Year=2019/Quarter=Q4/Month=12/*/*.parquet")
+    dfSales.show(10)
 
-dfCustomers = spark.read.load("abfss://wwi-02@" + datalake + ".dfs.core.windows.net/data-generators/generator-customer-clean.csv", format="csv", header=True)
-dfCustomers.show(10)
+    dfCustomers = spark.read.load("abfss://wwi-02@" + datalake + ".dfs.core.windows.net/data-generators/generator-customer-clean.csv", format="csv", header=True)
+    dfCustomers.show(10)
 
-# Create an instance of Hyperspace
-hyperspace = Hyperspace(spark)
-```
+    # Create an instance of Hyperspace
+    hyperspace = Hyperspace(spark)
+    ```
 
 7. In the **datalake** variable value, replace ***SUFFIX*** with your unique resource name extension, so that the variable represents the name of your Azure Data Lake storage account (which should be **asadatalake*xxxxxx***).
 
