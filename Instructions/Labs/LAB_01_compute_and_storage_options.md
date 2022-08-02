@@ -108,7 +108,6 @@ In this exercise, you will use an Azure Databricks workspace and perform Structu
     > 1. The following error may occur when creating SQL users and adding role assignments in the dedicated SQL pool, and can safely be ignored:
     >
     >    *Principal 'xxx@xxx.com' could not be created. Only connections established with Active Directory accounts can create other Active Directory users.*
-    >
 
 ## Exercise 2 - Working with Apache Spark in Synapse Analytics
 
