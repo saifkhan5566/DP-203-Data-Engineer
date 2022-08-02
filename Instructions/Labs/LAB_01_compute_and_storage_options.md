@@ -67,7 +67,7 @@ In this exercise, you will use an Azure Databricks workspace and perform Structu
 
     Within the notebook, you will explore combining streaming and batch processing with a single pipeline.
 
-## Important: Shut down your Databricks cluster
+> **[!IMPORTANT] Shut down your Databricks cluster**
 
 1. After you've finished exploring the Azure Databricks notebook; in your Azure Databricks workspace, the left pane, select **Compute** and select your cluster. Then select **Terminate** to stop the cluster.
 
