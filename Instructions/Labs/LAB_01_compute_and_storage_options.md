@@ -67,7 +67,7 @@ In this exercise, you will use an Azure Databricks workspace and perform Structu
 
     Within the notebook, you will explore combining streaming and batch processing with a single pipeline.
 
-## Important: Shut down your cluster
+## Important: Shut down your Databricks cluster
 
 1. After you've finished exploring the Azure Databricks notebook; in your Azure Databricks workspace, the left pane, select **Compute** and select your cluster. Then select **Terminate** to stop the cluster.
 
@@ -99,18 +99,18 @@ In this exercise, you will use an Azure Databricks workspace and perform Structu
    exit
    ```
 
-    **NOTE**: This script should run in roughly 10-15 minutes and loads data into Synapse.
->
-> If it seems as though the script hangs while creating linked services for the SQLPool01 dedicated SQL pool (there are 3), press **Enter**. This tends to refresh the PowerShell script and allows it to continue to the end.
->
-> ### Potential errors that you can ignore
->
-> You may encounter a few errors and warnings during the script execution. The errors below can safely be ignored:
->
-> 1. The following error may occur when creating SQL users and adding role assignments in the dedicated SQL pool, and can safely be ignored:
->
->       *Principal 'xxx@xxx.com' could not be created. Only connections established with Active Directory accounts can create other Active Directory users.*
->
+    > **NOTE**: This script should run in roughly 10-15 minutes and loads data into Synapse.
+    >
+    > If it seems as though the script hangs while creating linked services for the SQLPool01 dedicated SQL pool (there are 3), press **Enter**. This tends to refresh the PowerShell script and allows it to continue to the end.
+    >
+    > ### Potential errors that you can ignore
+    >
+    > You may encounter a few errors and warnings during the script execution. The errors below can safely be ignored:
+    >
+    > 1. The following error may occur when creating SQL users and adding role assignments in the dedicated SQL pool, and can safely be ignored:
+    >
+    >       *Principal 'xxx@xxx.com' could not be created. Only connections established with Active Directory accounts can create other Active Directory users.*
+    >
 
 ## Exercise 2 - Working with Apache Spark in Synapse Analytics
 
