@@ -67,7 +67,7 @@ In this exercise, you will use an Azure Databricks workspace and perform Structu
 
     Within the notebook, you will explore combining streaming and batch processing with a single pipeline.
 
-## Important: Shut down your cluster
+    > **Tip**: Shut down your **Databricks** cluster
 
 1. After you've finished exploring the Azure Databricks notebook; in your Azure Databricks workspace, the left pane, select **Compute** and select your cluster. Then select **Terminate** to stop the cluster.
 
@@ -99,19 +99,16 @@ In this exercise, you will use an Azure Databricks workspace and perform Structu
    exit
    ```
 
-    **NOTE**: This script should run in roughly 10-15 minutes and loads data into Synapse.
->
-> If it seems as though the script hangs while creating linked services for the SQLPool01 dedicated SQL pool (there are 3), press **Enter**. This tends to refresh the PowerShell script and allows it to continue to the end.
->
+> **Note**: This script should run in roughly 10-15 minutes and loads data into Synapse. If it seems as though the script hangs while creating linked services for     the SQLPool01 dedicated SQL pool (there are 3), press **Enter**. This tends to refresh the PowerShell script and allows it to continue to the end.
+
 > ### Potential errors that you can ignore
 >
 > You may encounter a few errors and warnings during the script execution. The errors below can safely be ignored:
 >
 > 1. The following error may occur when creating SQL users and adding role assignments in the dedicated SQL pool, and can safely be ignored:
 >
->       *Principal 'xxx@xxx.com' could not be created. Only connections established with Active Directory accounts can create other Active Directory users.*
->
-> 
+>    *Principal 'xxx@xxx.com' could not be created. Only connections established with Active Directory accounts can create other Active Directory users.*
+
 ## Exercise 2 - Working with Apache Spark in Synapse Analytics
 
 This exercise demonstrates the experience of working with Apache Spark in Azure Synapse Analytics. You will also learn how to use libraries like Hyperspace and MSSparkUtil to optimize the experience of working with Data Lake storage accounts from Spark notebooks.
@@ -146,26 +143,26 @@ Also, Hyperspace allows users to compare their original plan versus the updated 
 
 6. Add the following code to a new cell in your notebook:
 
-```python
-from hyperspace import *  
-from com.microsoft.hyperspace import *
-from com.microsoft.hyperspace.index import *
+    ```python
+    from hyperspace import *  
+    from com.microsoft.hyperspace import *
+    from com.microsoft.hyperspace.index import *
 
-# Disable BroadcastHashJoin, so Spark will use standard SortMergeJoin. Currently, Hyperspace indexes utilize SortMergeJoin to speed up query.
-spark.conf.set("spark.sql.autoBroadcastJoinThreshold", -1)
+    # Disable BroadcastHashJoin, so Spark will use standard SortMergeJoin. Currently, Hyperspace indexes utilize SortMergeJoin to speed up query.
+    spark.conf.set("spark.sql.autoBroadcastJoinThreshold", -1)
 
-# Replace the value below with the name of your primary ADLS Gen2 account for your Synapse workspace
-datalake = 'asadatalakeSUFFIX'
+    # Replace the value below with the name of your primary ADLS Gen2 account for your Synapse workspace
+    datalake = 'asadatalakeSUFFIX'
 
-dfSales = spark.read.parquet("abfss://wwi-02@" + datalake + ".dfs.core.windows.net/sale-small/Year=2019/Quarter=Q4/Month=12/*/*.parquet")
-dfSales.show(10)
+    dfSales = spark.read.parquet("abfss://wwi-02@" + datalake + ".dfs.core.windows.net/sale-small/Year=2019/Quarter=Q4/Month=12/*/*.parquet")
+    dfSales.show(10)
 
-dfCustomers = spark.read.load("abfss://wwi-02@" + datalake + ".dfs.core.windows.net/data-generators/generator-customer-clean.csv", format="csv", header=True)
-dfCustomers.show(10)
+    dfCustomers = spark.read.load("abfss://wwi-02@" + datalake + ".dfs.core.windows.net/data-generators/generator-customer-clean.csv", format="csv", header=True)
+    dfCustomers.show(10)
 
-# Create an instance of Hyperspace
-hyperspace = Hyperspace(spark)
-```
+    # Create an instance of Hyperspace
+    hyperspace = Hyperspace(spark)
+    ```
 
 7. In the **datalake** variable value, replace ***SUFFIX*** with your unique resource name extension, so that the variable represents the name of your Azure Data Lake storage account (which should be **asadatalake*xxxxxx***).
 
@@ -189,15 +186,15 @@ hyperspace = Hyperspace(spark)
 
 10. Paste the following code into the new cell:
 
-```python
-#create indexes: each one contains a name, a set of indexed columns and a set of included columns
-indexConfigSales = IndexConfig("indexSALES", ["CustomerId"], ["TotalAmount"])
-indexConfigCustomers = IndexConfig("indexCUSTOMERS", ["CustomerId"], ["FullName"])
+    ```python
+    #create indexes: each one contains a name, a set of indexed columns and a set of included columns
+    indexConfigSales = IndexConfig("indexSALES", ["CustomerId"], ["TotalAmount"])
+    indexConfigCustomers = IndexConfig("indexCUSTOMERS", ["CustomerId"], ["FullName"])
 
-hyperspace.createIndex(dfSales, indexConfigSales)			# only create index once
-hyperspace.createIndex(dfCustomers, indexConfigCustomers)	# only create index once
-hyperspace.indexes().show()
-```
+    hyperspace.createIndex(dfSales, indexConfigSales)			# only create index once
+    hyperspace.createIndex(dfCustomers, indexConfigCustomers)	# only create index once
+    hyperspace.indexes().show()
+    ```
 
 11. Run the new cell. It will create two indexes and display their structure.
 
@@ -205,11 +202,11 @@ hyperspace.indexes().show()
 
 12. Add another new code cell to your notebook with the following code:
 
-```python
-df1 = dfSales.filter("""CustomerId = 6""").select("""TotalAmount""")
-df1.show()
-df1.explain(True)
-```
+    ```python
+    df1 = dfSales.filter("""CustomerId = 6""").select("""TotalAmount""")
+    df1.show()
+    df1.explain(True)
+    ```
 
 13. Run the new cell. The output will show that the physical execution plan is not taking into account any of the indexes (performs a file scan on the original data file).
 
@@ -217,13 +214,13 @@ df1.explain(True)
 
 14. Now add another new cell to your notebook with the following code (notice the extra line at the beginning used to enable Hyperspace optimization in the Spark engine):
 
-```python
-# Enable Hyperspace - Hyperspace optimization rules become visible to the Spark optimizer and exploit existing Hyperspace indexes to optimize user queries
-Hyperspace.enable(spark)
-df1 = dfSales.filter("""CustomerId = 6""").select("""TotalAmount""")
-df1.show()
-df1.explain(True)
-```
+    ```python
+    # Enable Hyperspace - Hyperspace optimization rules become visible to the Spark optimizer and exploit existing Hyperspace indexes to optimize user queries
+    Hyperspace.enable(spark)
+    df1 = dfSales.filter("""CustomerId = 6""").select("""TotalAmount""")
+    df1.show()
+    df1.explain(True)
+    ```
 
 15. Run the new cell. The output will show that the physical execution plan is now using the index instead of the original data file.
 
@@ -231,12 +228,12 @@ df1.explain(True)
 
 16. Hyperspace provides an Explain API that allows you to compare the execution plans without indexes vs. with indexes. Add a new cell with the following code:
 
-```python
-df1 = dfSales.filter("""CustomerId = 6""").select("""TotalAmount""")
+    ```python
+    df1 = dfSales.filter("""CustomerId = 6""").select("""TotalAmount""")
 
-spark.conf.set("spark.hyperspace.explain.displayMode", "html")
-hyperspace.explain(df1, True, displayHTML)
-```
+    spark.conf.set("spark.hyperspace.explain.displayMode", "html")
+    hyperspace.explain(df1, True, displayHTML)
+    ```
 
 17. Run the new cell. The output shows a comparison `Plan with indexes` vs. `Plan without indexes`. Observe how, in the first case the index file is used while in the second case the original data file is used.
 
@@ -244,11 +241,11 @@ hyperspace.explain(df1, True, displayHTML)
 
 18. Let's investigate now a more complex case, involving a join operation. Add a new cell with the following code:
 
-```python
-eqJoin = dfSales.join(dfCustomers, dfSales.CustomerId == dfCustomers.CustomerId).select(dfSales.TotalAmount, dfCustomers.FullName)
+    ```python
+    eqJoin = dfSales.join(dfCustomers, dfSales.CustomerId == dfCustomers.CustomerId).select(dfSales.TotalAmount, dfCustomers.FullName)
 
-hyperspace.explain(eqJoin, True, displayHTML)
-```
+    hyperspace.explain(eqJoin, True, displayHTML)
+    ```
 
 19. Run the new cell. The output shows again a comparison `Plan with indexes` vs. `Plan without indexes`, where indexes are used in the first case and the original data files in the second.
 
@@ -256,15 +253,15 @@ hyperspace.explain(eqJoin, True, displayHTML)
 
 20. To deactivate Hyperspace and clean up the indexes, add and run a new cell with the following code:
 
-```python
-# Disable Hyperspace - Hyperspace rules no longer apply during query optimization. Disabling Hyperspace has no impact on created indexes because they remain intact
-Hyperspace.disable(spark)
+    ```python
+    # Disable Hyperspace - Hyperspace rules no longer apply during query optimization. Disabling Hyperspace has no impact on created indexes because they remain intact
+    Hyperspace.disable(spark)
 
-hyperspace.deleteIndex("indexSALES")
-hyperspace.vacuumIndex("indexSALES")
-hyperspace.deleteIndex("indexCUSTOMERS")
-hyperspace.vacuumIndex("indexCUSTOMERS")
-```
+    hyperspace.deleteIndex("indexSALES")
+    hyperspace.vacuumIndex("indexSALES")
+    hyperspace.deleteIndex("indexCUSTOMERS")
+    hyperspace.vacuumIndex("indexCUSTOMERS")
+    ```
 
 ### Task 2: Explore the Data Lake storage with the MSSparkUtil library
 
@@ -272,35 +269,35 @@ Microsoft Spark Utilities (MSSparkUtils) is a builtin package to help you easily
 
 1. Continue with the same notebook from the previous task and add a new cell with the following code:
 
-```python
-from notebookutils import mssparkutils
+    ```python
+    from notebookutils import mssparkutils
 
-#
-# Microsoft Spark Utilities
-#
-# https://docs.microsoft.com/en-us/azure/synapse-analytics/spark/microsoft-spark-utilities?pivots=programming-language-python
-#
+    #
+    # Microsoft Spark Utilities
+    #
+    # https://docs.microsoft.com/en-us/azure/synapse-analytics/spark/microsoft-spark-utilities?pivots=programming-language-python
+    #
 
-# Azure storage access info
-blob_account_name = datalake
-blob_container_name = 'wwi-02'
-blob_relative_path = '/'
-linkedServiceName = datalake
-blob_sas_token = mssparkutils.credentials.getConnectionStringOrCreds(linkedServiceName)
+    # Azure storage access info
+    blob_account_name = datalake
+    blob_container_name = 'wwi-02'
+    blob_relative_path = '/'
+    linkedServiceName = datalake
+    blob_sas_token = mssparkutils.credentials.getConnectionStringOrCreds(linkedServiceName)
 
-# Allow SPARK to access from Blob remotely
-spark.conf.set('fs.azure.sas.%s.%s.blob.core.windows.net' % (blob_container_name, blob_account_name), blob_sas_token)
+    # Allow SPARK to access from Blob remotely
+    spark.conf.set('fs.azure.sas.%s.%s.blob.core.windows.net' % (blob_container_name, blob_account_name), blob_sas_token)
 
-files = mssparkutils.fs.ls('/')
-for file in files:
-    print(file.name, file.isDir, file.isFile, file.path, file.size)
+    files = mssparkutils.fs.ls('/')
+    for file in files:
+        print(file.name, file.isDir, file.isFile, file.path, file.size)
 
-mssparkutils.fs.mkdirs('/SomeNewFolder')
+    mssparkutils.fs.mkdirs('/SomeNewFolder')
 
-files = mssparkutils.fs.ls('/')
-for file in files:
-    print(file.name, file.isDir, file.isFile, file.path, file.size)
-```
+    files = mssparkutils.fs.ls('/')
+    for file in files:
+        print(file.name, file.isDir, file.isFile, file.path, file.size)
+    ```
 
 2. Run the new cell and observe how MSSparkUtils is used to work with the file system.
 
