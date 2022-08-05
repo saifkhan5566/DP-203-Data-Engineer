@@ -116,7 +116,7 @@ In this task, you will create and configure a new event hub within the provided 
 
 13. Select your **Write** policy from the list. Copy the **Connection string - primary key** value by selecting the Copy button to the right of the field. Save this value in Notepad or similar text editor for later.
 
-    ![The Write policy is selected and its blade displayed. The Copy button next to the Connection string - primary key field is highlighted.](images/event-hubs-write-policy-key.png 'SAS Policy: Write')
+    ![The Write policy is selected and its blade displayed. The Copy button next to the Connection string primary key field is highlighted.](images/event-hubs-write-policy-key.png 'SAS Policy: Write')
 
 ### Task 2: Configure Synapse Analytics
 
