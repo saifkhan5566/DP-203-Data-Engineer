@@ -93,11 +93,11 @@ In this task, you will create and configure a new event hub within the provided 
     - **Send:** Unchecked
     - **Listen:** Checked
 
-        ![The Add SAS Policy form is filled out with the previously mentioned settings entered into the appropriate fields.](images/event-hubs-add-sas-policy-read.png 'Add SAS Policy')
+        ![The Add SAS Policy blade is filled out with the previously mentioned settings entered into the appropriate fields.](images/event-hubs-add-sas-policy-read.png 'Add SAS Policy')
 
         > It is a best practice to create separate policies for reading, writing, and managing events. This follows the principle of least privilege to prevent services and applications from performing unauthorized operations.
 
-9. Select **Create** on the bottom of the form when you are finished entering the values.
+9. Select **Create** on the bottom of the blade when you are finished entering the values.
 
 10. Select **+ Add** in the top toolbar to create a second new shared access policy.
 
@@ -112,11 +112,11 @@ In this task, you will create and configure a new event hub within the provided 
 
         ![The Add SAS Policy form is filled out with the previously mentioned settings entered into the appropriate fields.](images/event-hubs-add-sas-policy-write.png 'Add SAS Policy')
 
-12. Select **Create** on the bottom of the form when you are finished entering the values.
+12. Select **Create** on the bottom of the blade when you are finished entering the values.
 
 13. Select your **Write** policy from the list. Copy the **Connection string - primary key** value by selecting the Copy button to the right of the field. Save this value in Notepad or similar text editor for later.
 
-    ![The Write policy is selected and its blade displayed. The Copy button next to the Connection string primary key field is highlighted.](images/event-hubs-write-policy-key.png 'SAS Policy: Write')
+       ![The Write policy is selected and its blade displayed. The Copy button next to the Connection string primary key field is highlighted.](images/event-hubs-write-policy-key.png 'SAS Policy Write')
 
 ### Task 2: Configure Synapse Analytics
 
